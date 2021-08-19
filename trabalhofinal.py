@@ -240,17 +240,17 @@ while (continuar_jogando):
             if matriz[z+1][i][z+1] == ' ':
                 if matriz[z][i][z] == caractere_player and matriz[z+2][i][z+2] == caractere_player:
                     matriz[z+1][i][z+1] = caractere_computer
-                    return imprimir_tabuleiro
+                    return imprimir_tabuleiro()
                 elif matriz[z][i][z+2] == caractere_player and matriz[z+2][i][z] == caractere_player:
                     matriz[z+1][i][z+1] = caractere_computer
                     return imprimir_tabuleiro()
             elif matriz[z+1][i][z+1] == caractere_player:
                 if matriz[z][i][z] == ' ' and matriz[z+2][i][z+2] == caractere_player:
                     matriz[z][i][z] = caractere_computer
-                    return imprimir_tabuleiro
+                    return imprimir_tabuleiro()
                 elif matriz[z+2][i][z+2] == ' ' and matriz[z][i][z] == caractere_player:
-                    matriz[z][i][z] = caractere_computer
-                    return imprimir_tabuleiro
+                    matriz[z+2][i][z+2] = caractere_computer
+                    return imprimir_tabuleiro()
                 elif matriz[z][i][z+2] == ' ' and matriz[z+2][i][z] == caractere_player:
                     matriz[z][i][z+2] = caractere_computer
                     return imprimir_tabuleiro()
