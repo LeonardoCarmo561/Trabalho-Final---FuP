@@ -623,8 +623,6 @@ while (continuar_jogando):
         jogada_maquina()
 
 
-    matriz = [ [[' '] * 3 for i in range(3)] * 3 for j in range(3) ]
-    tem_vencedor = False
 
     # Pergunta-se ao usuário se ele deseja continuar jogando
     cj = input("Deseja continuar jogando? (Digite S para sim e N para não): ")
