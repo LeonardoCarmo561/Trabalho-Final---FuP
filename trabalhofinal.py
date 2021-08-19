@@ -17,6 +17,8 @@ while (continuar_jogando):
     # Criando o tabuleiro
     matriz = [ [[' '] * 3 for i in range(3)] * 3 for j in range(3) ]
 
+    tem_vencedor = False
+
     def imprimir_tabuleiro():
         print("  CAMADA  1       CAMADA  2       CAMADA  3")
         print("  1   2   3       1   2   3       1   2   3")
@@ -55,7 +57,108 @@ while (continuar_jogando):
         print("Dentro da jogada do usuario")
         imprimir_tabuleiro()
 
-    jogada_do_usuario()
+    
+    # Função para a quinta condição da jogada do computador
+    def jogada_do_computador_cod_5():
+        aceitavel = True
+        while (aceitavel):
+            a = r.randint(0, 2)
+            b = r.randint(0, 2)
+            c = r.randint(0, 2)
+
+            if (matriz[a][b][c] != ' '):
+                aceitavel = True
+            else:
+                aceitavel = False
+                matriz[a][b][c] = caractere_computer
+
+        imprimir_tabuleiro()
+
+
+    def jogada_do_computador_cod_4():
+        casas_pode_jogar = [ [[True] * 3 for i in range(3)] * 3 for j in range(3) ]
+        
+        # Verificando em quais casas pode-se jogar
+        for i in range(0, 3):
+            for j in range(0, 3):
+                for k in range(0, 3):
+                    if matriz[i][j][k] != 0:
+                        casas_pode_jogar[i][j][k] = False
+
+                        # Para uma mesma camada
+                        if j == 0:
+                            casas_pode_jogar[i][j+1][k] = False
+                            casas_pode_jogar[i][j+2][k] = False
+                        elif j == 1:
+                            casas_pode_jogar[i][j-1][k] = False
+                            casas_pode_jogar[i][j+1][k] = False
+                        else:
+                            casas_pode_jogar[i][j-2][k] = False
+                            casas_pode_jogar[i][j-1][k] = False
+                        
+                        if k == 0:
+                            casas_pode_jogar[i][j][k+1] = False
+                            casas_pode_jogar[i][j][k+2] = False
+
+                            if j == k:
+                                casas_pode_jogar[i][j+1][k+1] = False
+                                casas_pode_jogar[i][j+2][k+2] = False
+
+
+                        elif k == 1:
+                            casas_pode_jogar[i][j][k-1] = False
+                            casas_pode_jogar[i][j][k+1] = False
+
+                            if j == k:
+                                casas_pode_jogar[i][j-1][k-1] = False
+                                casas_pode_jogar[i][j+1][k+1] = False
+
+                        else:
+                            casas_pode_jogar[i][j][k-2] = False
+                            casas_pode_jogar[i][j][k-1] = False
+
+
+                            if j == k:
+                                casas_pode_jogar[i][j-2][k-2] = False
+                                casas_pode_jogar[i][j-1][k-1] = False
+
+
+        for i in range(3):
+            for j in range(3):
+                for k in range(3):
+                    if casas_pode_jogar[i][j][k] == True:
+                        matriz[i][j][k] = caractere_computer
+                        return imprimir_tabuleiro()
+
+        jogada_do_computador_cod_5()
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     #jogada do cmoputador opção 2
     def jog_maq_entb_diag():
@@ -100,6 +203,8 @@ while (continuar_jogando):
             elif matriz[0][2][2] == caractere_player and matriz[2][0][0] == ' ':
                 matriz[2][0][0] = caractere_computer
                 return imprimir_tabuleiro()
+
+        jogada_do_computador_cod_4()
         
     
     def jog_maq_entb_mc():
@@ -236,222 +341,290 @@ while (continuar_jogando):
 
     #jogada do computador opção 1
     def vit_maq_entb_diag():
+        global tem_vencedor
         if matriz[1][1][1] == ' ':
             if matriz[0][0][0] == caractere_computer and matriz[2][2][2] == caractere_computer:
                 matriz[1][1][1] = caractere_computer
+                
+                tem_vencedor = True
                 return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
             elif matriz[0][0][2] == caractere_computer and matriz[2][2][0] == caractere_computer:
                 matriz[1][1][1] = caractere_computer
+
+                tem_vencedor = True
                 return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
             elif matriz[0][2][0] == caractere_computer and matriz[2][0][2] == caractere_computer:
                 matriz[1][1][1] = caractere_computer
+
+                tem_vencedor = True
                 return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
             elif matriz[0][2][2] == caractere_computer and matriz[2][0][0] == caractere_computer:
                 matriz[1][1][1] = caractere_computer
+
+                tem_vencedor = True
                 return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
         elif matriz[1][1][1] == caractere_computer:
             if matriz[0][0][0] == ' ' and matriz[2][2][2] == caractere_computer:
                 matriz[0][0][0] = caractere_computer
+
+                tem_vencedor = True
                 return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
             elif matriz[0][0][0] == caractere_computer and matriz[2][2][2] == ' ':
                 matriz[2][2][2] = caractere_computer
+
+                tem_vencedor = True
                 return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
             
             elif matriz[0][0][2] == ' ' and matriz[2][2][0] == caractere_computer:
                 matriz[0][0][2] = caractere_computer
+
+                tem_vencedor = True
                 return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
             elif matriz[0][0][2] == caractere_computer and matriz[2][2][0] == ' ':
                 matriz[2][2][0] = caractere_computer
+    
+                tem_vencedor = True
                 return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
             
             elif matriz[0][2][0] == ' ' and matriz[2][0][2] == caractere_computer:
                 matriz[0][2][0] = caractere_computer
+      
+                tem_vencedor = True
                 return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
             elif matriz[0][2][0] == caractere_computer and matriz[2][0][2] == ' ':
                 matriz[2][0][2] = caractere_computer
+       
+                tem_vencedor = True
                 return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
             
             elif matriz[0][2][2] == ' ' and matriz[2][0][0] == caractere_computer:
                 matriz[0][2][2] = caractere_computer
+
+                tem_vencedor = True
                 return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
             elif matriz[0][2][2] == caractere_computer and matriz[2][0][0] == ' ':
                 matriz[2][0][0] = caractere_computer
+
+                tem_vencedor = True
                 return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
         jogada_maquina_2()
     
     def vit_maq_entb_mc():
         z = 0
+        global tem_vencedor
         for i in range (0, 3):
             if matriz[z+1][z+1][i] == ' ':
                 if matriz[z][z][i] == caractere_computer and matriz[z+2][z+2][i] == caractere_computer:
                     matriz[z+1][z+1][i] = caractere_computer
+            
+                    tem_vencedor = True
                     return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
                 elif matriz[z+2][z][i] == caractere_computer and matriz[z][z+2][i] == caractere_computer:
                     matriz[z+1][z+1][i] = caractere_computer
+                    
+                    tem_vencedor = True
                     return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
             elif matriz[z+1][z+1][i] == caractere_computer:
                 if matriz[z][z][i] == ' ' and matriz[z+2][z+2][i] == caractere_computer:
                     matriz[z][z][i] = caractere_computer
+                    
+                    tem_vencedor = True
                     return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
                 elif matriz[z+2][z+2][i] == ' ' and matriz[z][z][i] == caractere_computer:
                     matriz[z+2][z+2][i] = caractere_computer
+                   
+                    tem_vencedor = True
                     return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
                 
                 elif matriz[z+2][z][i] == ' ' and matriz[z][z+2][i] == caractere_computer:
                     matriz[z+2][z][i] = caractere_computer
+                  
+                    tem_vencedor = True
                     return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
                 elif matriz[z][z+2][i] == ' ' and matriz[z+2][z][i] == caractere_computer:
                     matriz[z][z+2][i] = caractere_computer
+                   
+                    tem_vencedor = True
                     return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
         vit_maq_entb_diag()
     
     def vit_maq_entb_g():
         z = 0
+        global tem_vencedor
         for i in range (0, 3):
             if matriz[z+1][i][z+1] == ' ':
                 if matriz[z][i][z] == caractere_computer and matriz[z+2][i][z+2] == caractere_computer:
                     matriz[z+1][i][z+1] = caractere_computer
+                   
+                    tem_vencedor = True
                     return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
                 elif matriz[z][i][z+2] == caractere_computer and matriz[z+2][i][z] == caractere_computer:
                     matriz[z+1][i][z+1] = caractere_computer
+                    
+                    tem_vencedor = True
                     return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
             elif matriz[z+1][i][z+1] == caractere_computer:
                 if matriz[z][i][z] == ' ' and matriz[z+2][i][z+2] == caractere_computer:
                     matriz[z][i][z] = caractere_computer
+                   
+                    tem_vencedor = True
                     return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
                 elif matriz[z+2][i][z+2] == ' ' and matriz[z][i][z] == caractere_computer:
                     matriz[z][i][z] = caractere_computer
+                  
+                    tem_vencedor = True
                     return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
                 elif matriz[z][i][z+2] == ' ' and matriz[z+2][i][z] == caractere_computer:
                     matriz[z][i][z+2] = caractere_computer
+                
+                    tem_vencedor = True
                     return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
                 elif matriz[z+2][i][z] == ' ' and matriz[z][i][z+2] == caractere_computer:
                     matriz[z+2][i][z] = caractere_computer
+              
+                    tem_vencedor = True
                     return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
         vit_maq_entb_mc()
     
     def vitoria_maquina_entb():
+        global tem_vencedor
         for i in range(0, 3):
             for j in range (0, 3):
                 z = 0
                 if matriz[z][i][j] == ' ':
                     if matriz[z+1][i][j] == caractere_computer and matriz[z+2][i][j] == caractere_computer:
                         matriz[z][i][j] = caractere_computer
+                    
+                        tem_vencedor = True
                         return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
                 elif matriz[z+1][i][j] == ' ':
                     if matriz[z][i][j] == caractere_computer and matriz[z+2][i][j] == caractere_computer:
                         matriz[z+1][i][j] = caractere_computer
+                        
+                        tem_vencedor = True
                         return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
                 elif matriz[z+2][i][j] == ' ':
                     if matriz[z][i][j] == caractere_computer and matriz[z+1][i][j] == caractere_computer:
                         matriz[z+2][i][j] = caractere_computer
+                        
+                        tem_vencedor = True
                         return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
         vit_maq_entb_g()
     
     def vitoria_maquina_diag():
+        global tem_vencedor
         for i in range(0, 3):
             z = 0
             if matriz[i][1][1] == ' ':
                 if matriz[i][0][0] == caractere_computer and matriz[i][2][2] == caractere_computer:
                     matriz[i][1][1] = caractere_computer
+                 
+                    tem_vencedor = True
                     return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
                 if matriz[i][0][2] == caractere_computer and matriz[i][2][0] == caractere_computer:
                     matriz[i][1][1] = caractere_computer
+                    
+                    tem_vencedor = True
                     return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
             elif matriz[i][1][1] == caractere_computer:
                 if matriz[i][0][0] == caractere_computer and matriz[i][2][2] == ' ':
                     matriz[i][2][2] = caractere_computer
+                   
+                    tem_vencedor = True
                     return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
                 elif matriz[i][2][2] == caractere_computer and matriz[i][0][0] == ' ':
                     matriz[i][0][0] = caractere_computer
+                  
+                    tem_vencedor = True
                     return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
                 elif matriz[i][0][2] == caractere_computer and matriz[i][2][0] == ' ':
                     matriz[i][2][0] = caractere_computer
+               
+                    tem_vencedor = True
                     return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
                 elif matriz[i][2][0] == caractere_computer and matriz[i][0][2] == ' ':
                     matriz[i][0][2] = caractere_computer
+                 
+                    tem_vencedor = True
                     return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
         vitoria_maquina_entb()
     
     def vitoria_maquina_lin():
+        global tem_vencedor
         for i in range(0, 3):
             for j in range (0, 3):
                 z = 0
                 if matriz[i][z][j] == ' ':
                     if matriz[i][z+1][j] == caractere_computer and matriz[i][z+2][j] == caractere_computer:
                         matriz[i][z][j] = caractere_computer
+                       
+                        tem_vencedor = True
                         return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
                 elif matriz[i][z+1][j] == ' ':
                     if matriz[i][z][j] == caractere_computer and matriz[i][z+2][j] == caractere_computer:
                         matriz[i][z+1][j] = caractere_computer
+                    
+                        tem_vencedor = True
                         return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
                 elif matriz[i][z+2][j] == ' ':
                     if matriz[i][z][j] == caractere_computer and matriz[i][z+1][j] == caractere_computer:
                         matriz[i][z+2][j] = caractere_computer
+                       
+                        tem_vencedor = True
                         return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
         vitoria_maquina_diag()
     
     def jogada_maquina():
+        global tem_vencedor
         for i in range (0, 3):
             for j in range (0, 3):
                 z = 0
                 if matriz[i][j][z] == ' ':
                     if matriz[i][j][z+1] == caractere_computer and matriz[i][j][z+2] == caractere_computer:
                         matriz[i][j][z] = caractere_computer
+                   
+                        tem_vencedor = True
                         return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
                 elif matriz[i][j][z+1] == ' ':
                     if matriz[i][j][z] == caractere_computer and matriz[i][j][z+2] == caractere_computer:
                         matriz[i][j][z+1] = caractere_computer
+                       
+                        tem_vencedor = True
                         return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
                 elif matriz[i][j][z+2] == ' ':
                     if matriz[i][j][z] == caractere_computer and matriz[i][j][z+1] == caractere_computer:
                         matriz[i][j][z+2] = caractere_computer
+                      
+                        tem_vencedor = True
                         return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
         vitoria_maquina_lin()
 
 
-# Teste
 
 
 
+    # Primeira jogada do usuário
+    jogada_do_usuario()
 
 
-
-
-
-
-
-    # Primeira jogada do computador, verificando se a casa se encontra vazia
-    aceitavel = True
-    while (aceitavel):
-        a = r.randint(0, 2)
-        b = r.randint(0, 2)
-        c = r.randint(0, 2)
-
-        if (matriz[a][b][c] != ' '):
-            aceitavel = True
-        else:
-            aceitavel = False
-            matriz[a][b][c] = caractere_computer
-
-    imprimir_tabuleiro()
+    # Primeira jogada do computador
+    jogada_do_computador_cod_5()
 
     # Segunda jogada do usuário
     jogada_do_usuario()
+
+    # Segunda jogada do xomputador
+
     jogada_maquina()
+    # jogada_maquina()
+
+    while tem_vencedor == False:
+        jogada_do_usuario()
+        jogada_maquina()
 
 
-    jogada_do_usuario()
-    jogada_maquina()
-
-    jogada_do_usuario()
-    jogada_maquina()
-
-    jogada_do_usuario()
-    jogada_maquina()
-
-    jogada_do_usuario()
-    jogada_maquina()
+    matriz = [ [[' '] * 3 for i in range(3)] * 3 for j in range(3) ]
+    tem_vencedor = False
 
     # Pergunta-se ao usuário se ele deseja continuar jogando
     cj = input("Deseja continuar jogando? (Digite S para sim e N para não): ")
@@ -463,6 +636,3 @@ while (continuar_jogando):
 
 
 
-
-
-#Função para olhar condição 2 entre as linhas e mesma tabela
