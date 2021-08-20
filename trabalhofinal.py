@@ -1,5 +1,5 @@
 import random as r
-
+l = 0
 continuar_jogando = True
 while (continuar_jogando):
     caractere_player = input("Deseja jogar com X ou O? ")
@@ -76,7 +76,7 @@ while (continuar_jogando):
 
 
     def jogada_do_computador_cod_4():
-        casas_pode_jogar = [[[True] * 3 for i in range(3)] * 3 for j in range(3) ]
+        casas_pode_jogar = [[[True, True, True]for i in range(3)]for j in range(3) ]
         
         # Verificando em quais casas pode-se jogar
         for i in range(0, 3):
@@ -128,7 +128,6 @@ while (continuar_jogando):
                     if casas_pode_jogar[i][j][k] == True:
                         matriz[i][j][k] = caractere_computer
                         return imprimir_tabuleiro()
-        print('PULOU')
         jogada_do_computador_cod_5()
   
 
@@ -444,7 +443,7 @@ while (continuar_jogando):
                     matriz[z][z+2][i] = caractere_computer
                    
                     tem_vencedor = True
-                    return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
+                    return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))    
         vit_maq_entb_diag()
     
     def vit_maq_entb_g():
