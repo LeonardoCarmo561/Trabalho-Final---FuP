@@ -15,7 +15,7 @@ while (continuar_jogando):
         caractere_computer = 'X'
 
     # Criando o tabuleiro
-    matriz = [ [[' '] * 3 for i in range(3)] * 3 for j in range(3) ]
+    matriz = [ [[' ',' ',' ']for i in range(3)]for j in range(3) ]
 
     tem_vencedor = False
 
@@ -76,15 +76,14 @@ while (continuar_jogando):
 
 
     def jogada_do_computador_cod_4():
-        casas_pode_jogar = [ [[True] * 3 for i in range(3)] * 3 for j in range(3) ]
+        casas_pode_jogar = [[[True] * 3 for i in range(3)] * 3 for j in range(3) ]
         
         # Verificando em quais casas pode-se jogar
         for i in range(0, 3):
             for j in range(0, 3):
                 for k in range(0, 3):
-                    if matriz[i][j][k] != 0:
+                    if matriz[i][j][k] != ' ':
                         casas_pode_jogar[i][j][k] = False
-
                         # Para uma mesma camada
                         if j == 0:
                             casas_pode_jogar[i][j+1][k] = False
@@ -129,7 +128,7 @@ while (continuar_jogando):
                     if casas_pode_jogar[i][j][k] == True:
                         matriz[i][j][k] = caractere_computer
                         return imprimir_tabuleiro()
-
+        print('PULOU')
         jogada_do_computador_cod_5()
   
 
@@ -608,7 +607,7 @@ while (continuar_jogando):
 
 
     # Primeira jogada do computador
-    jogada_do_computador_cod_5()
+    jogada_do_computador_cod_4()
 
     # Segunda jogada do usuário
     jogada_do_usuario()
