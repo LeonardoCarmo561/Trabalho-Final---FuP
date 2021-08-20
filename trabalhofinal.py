@@ -1,5 +1,5 @@
 import random as r
-l = 0
+
 continuar_jogando = True
 while (continuar_jogando):
     caractere_player = input("Deseja jogar com X ou O? ")
@@ -112,6 +112,10 @@ while (continuar_jogando):
                                 casas_pode_jogar[i][j-1][k-1] = False
                                 casas_pode_jogar[i][j+1][k+1] = False
 
+
+                                casas_pode_jogar[i][j-1][k+1] = False
+                                casas_pode_jogar[i][j+1][k-1] = False
+
                         else:
                             casas_pode_jogar[i][j][k-2] = False
                             casas_pode_jogar[i][j][k-1] = False
@@ -121,13 +125,85 @@ while (continuar_jogando):
                                 casas_pode_jogar[i][j-2][k-2] = False
                                 casas_pode_jogar[i][j-1][k-1] = False
 
+                        # Entre camadas
+                        if i == 0:
+                            casas_pode_jogar[i+1][j][k] = False
+                            casas_pode_jogar[i+2][j][k] = False
+
+                            if j == 0:
+                                casas_pode_jogar[i+1][j+1][k] = False
+                                casas_pode_jogar[i+2][j+2][k] = False
+
+                                if k == 0:
+                                    casas_pode_jogar[i+1][j+1][k+1] = False
+                                    casas_pode_jogar[i+2][j+2][k+2] = False
+                                
+                                elif k == 2:
+                                    casas_pode_jogar[1][1][1] = False
+                                    casas_pode_jogar[2][2][0] = False
+
+                            elif j == 2:
+                                casas_pode_jogar[i+1][j-1][k] = False
+                                casas_pode_jogar[i+2][j-2][k] = False
+
+                                if k == 0:
+                                    casas_pode_jogar[1][1][1] = False
+                                    casas_pode_jogar[2][0][2] = False
+
+                                elif k == 2:
+                                    casas_pode_jogar[1][1][1] = False
+                                    casas_pode_jogar[2][0][0] = False
+                        
+
+                        elif i == 1:
+                            casas_pode_jogar[i-1][j][k] = False
+                            casas_pode_jogar[i+1][j][k] = False
+
+                            if j == 1:
+                                casas_pode_jogar[i-1][j+1][k] = False
+                                casas_pode_jogar[i-1][j-1][k] = False
+
+                                casas_pode_jogar[i+1][j+1][k] = False
+                                casas_pode_jogar[i+1][j-1][k] = False
+
+                                if k == 1:
+                                    casas_pode_jogar[0][0][0] = False
+                                    casas_pode_jogar[0][2][0] = False
+                                    casas_pode_jogar[0][0][2] = False
+                                    casas_pode_jogar[0][2][2] = False
+
+                                    casas_pode_jogar[2][0][2] = False
+                                    casas_pode_jogar[2][2][0] = False
+                                    casas_pode_jogar[2][0][0] = False
+                                    casas_pode_jogar[2][2][2] = False
+
+                                    casas_pode_jogar[0][1][0] = False
+                                    casas_pode_jogar[0][1][2] = False
+                                    casas_pode_jogar[2][1][0] = False
+                                    casas_pode_jogar[2][1][2] = False
+                            
+                        
+                        else:
+                            casas_pode_jogar[i-2][j][k] = False
+                            casas_pode_jogar[i-1][j][k] = False
+
+                            if j == 0:
+                                casas_pode_jogar[i-1][j+1][k] = False
+                                casas_pode_jogar[i-2][j+2][k] = False
+
+                            elif j == 2:
+                                casas_pode_jogar[i-1][j-1][k] = False
+                                casas_pode_jogar[i-2][j-2][k] = False
+
+                            
+                        
 
         for i in range(3):
             for j in range(3):
                 for k in range(3):
                     if casas_pode_jogar[i][j][k] == True:
                         matriz[i][j][k] = caractere_computer
-                        return imprimir_tabuleiro()
+                        return (print("Cod 4") ,imprimir_tabuleiro())
         jogada_do_computador_cod_5()
   
 
