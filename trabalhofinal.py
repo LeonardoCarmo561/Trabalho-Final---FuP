@@ -1,4 +1,12 @@
 import random as r
+from pygame import mixer
+# install via
+# pip install pygame
+mixer.init()
+
+print()
+print("----- JOGO DA VELHA -----")
+
 vit = 0
 der = 0
 emp = 0
@@ -287,6 +295,12 @@ while (continuar_jogando):
                                     casas_pode_jogar[1][1][1] = False
                                     casas_pode_jogar[2][2][0] = False
 
+                            if j == 1:
+                                if k == 2:
+                                    casas_pode_jogar[i+1][j][k-1] = False
+                                    casas_pode_jogar[i+2][j][k-2] = False
+                            
+
                             elif j == 2:
                                 casas_pode_jogar[i+1][j-1][k] = False
                                 casas_pode_jogar[i+2][j-2][k] = False
@@ -341,7 +355,15 @@ while (continuar_jogando):
                                 casas_pode_jogar[i-2][j-2][k] = False
 
                             
-                        
+        for a in range(27):             
+            i = r.randint(0,2)
+            j = r.randint(0,2)
+            k = r.randint(0,2)
+
+            if casas_pode_jogar[i][j][k] == True:
+                nj += 1
+                matriz[i][j][k] = caractere_computer
+                return imprimir_tabuleiro()
 
         for i in range(3):
             for j in range(3):
@@ -350,6 +372,9 @@ while (continuar_jogando):
                         nj += 1
                         matriz[i][j][k] = caractere_computer
                         return imprimir_tabuleiro()
+
+
+                    
         jogada_do_computador_cod_5()
   
 
@@ -886,77 +911,77 @@ while (continuar_jogando):
                 tem_vencedor = True
                 nj += 1
                 der += 1
-                return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
+                return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'), mixer.music.load("defeat.mp3"), mixer.music.play())
             elif matriz[0][0][2] == caractere_computer and matriz[2][2][0] == caractere_computer:
                 matriz[1][1][1] = caractere_computer
                 tem_vencedor = True
                 nj += 1
                 der += 1
-                return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
+                return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'), mixer.music.load("defeat.mp3"), mixer.music.play())
             elif matriz[0][2][0] == caractere_computer and matriz[2][0][2] == caractere_computer:
                 matriz[1][1][1] = caractere_computer
                 tem_vencedor = True
                 nj += 1
                 der += 1
-                return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
+                return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'), mixer.music.load("defeat.mp3"), mixer.music.play())
             elif matriz[0][2][2] == caractere_computer and matriz[2][0][0] == caractere_computer:
                 matriz[1][1][1] = caractere_computer
                 tem_vencedor = True
                 nj += 1
                 der += 1
-                return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
+                return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'), mixer.music.load("defeat.mp3"), mixer.music.play())
         elif matriz[1][1][1] == caractere_computer:
             if matriz[0][0][0] == ' ' and matriz[2][2][2] == caractere_computer:
                 matriz[0][0][0] = caractere_computer
                 tem_vencedor = True
                 nj += 1
                 der += 1
-                return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
+                return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'), mixer.music.load("defeat.mp3"), mixer.music.play())
             elif matriz[0][0][0] == caractere_computer and matriz[2][2][2] == ' ':
                 matriz[2][2][2] = caractere_computer
                 tem_vencedor = True
                 nj += 1
                 der += 1
-                return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
+                return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'), mixer.music.load("defeat.mp3"), mixer.music.play())
             
             elif matriz[0][0][2] == ' ' and matriz[2][2][0] == caractere_computer:
                 matriz[0][0][2] = caractere_computer
                 tem_vencedor = True
                 nj += 1
                 der += 1
-                return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
+                return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'), mixer.music.load("defeat.mp3"), mixer.music.play())
             elif matriz[0][0][2] == caractere_computer and matriz[2][2][0] == ' ':
                 matriz[2][2][0] = caractere_computer
                 tem_vencedor = True
                 nj += 1
                 der += 1
-                return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
+                return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'), mixer.music.load("defeat.mp3"), mixer.music.play())
             
             elif matriz[0][2][0] == ' ' and matriz[2][0][2] == caractere_computer:
                 matriz[0][2][0] = caractere_computer
                 tem_vencedor = True
                 nj += 1
                 der += 1
-                return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
+                return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'), mixer.music.load("defeat.mp3"), mixer.music.play())
             elif matriz[0][2][0] == caractere_computer and matriz[2][0][2] == ' ':
                 matriz[2][0][2] = caractere_computer
                 tem_vencedor = True
                 nj += 1
                 der += 1
-                return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
+                return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'), mixer.music.load("defeat.mp3"), mixer.music.play())
             
             elif matriz[0][2][2] == ' ' and matriz[2][0][0] == caractere_computer:
                 matriz[0][2][2] = caractere_computer
                 tem_vencedor = True
                 nj += 1
                 der += 1
-                return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
+                return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'), mixer.music.load("defeat.mp3"), mixer.music.play())
             elif matriz[0][2][2] == caractere_computer and matriz[2][0][0] == ' ':
                 matriz[2][0][0] = caractere_computer
                 tem_vencedor = True
                 nj += 1
                 der += 1
-                return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
+                return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'), mixer.music.load("defeat.mp3"), mixer.music.play())
         jogada_maquina_2()
     
     def vit_maq_entb_mc():
@@ -969,40 +994,40 @@ while (continuar_jogando):
                     tem_vencedor = True
                     nj += 1
                     der += 1
-                    return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
+                    return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'), mixer.music.load("defeat.mp3"), mixer.music.play())
                 elif matriz[z+2][z][i] == caractere_computer and matriz[z][z+2][i] == caractere_computer:
                     matriz[z+1][z+1][i] = caractere_computer
                     tem_vencedor = True
                     nj += 1
                     der += 1
-                    return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
+                    return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'), mixer.music.load("defeat.mp3"), mixer.music.play())
             elif matriz[z+1][z+1][i] == caractere_computer:
                 if matriz[z][z][i] == ' ' and matriz[z+2][z+2][i] == caractere_computer:
                     matriz[z][z][i] = caractere_computer
                     tem_vencedor = True
                     nj += 1
                     der += 1
-                    return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
+                    return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'), mixer.music.load("defeat.mp3"), mixer.music.play())
                 elif matriz[z+2][z+2][i] == ' ' and matriz[z][z][i] == caractere_computer:
                     matriz[z+2][z+2][i] = caractere_computer
                     tem_vencedor = True
                     nj += 1
                     der += 1
-                    return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
+                    return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'), mixer.music.load("defeat.mp3"), mixer.music.play())
                 
                 elif matriz[z+2][z][i] == ' ' and matriz[z][z+2][i] == caractere_computer:
                     matriz[z+2][z][i] = caractere_computer
                     tem_vencedor = True
                     nj += 1
                     der += 1
-                    return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
+                    return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'), mixer.music.load("defeat.mp3"), mixer.music.play())
                 
                 elif matriz[z][z+2][i] == ' ' and matriz[z+2][z][i] == caractere_computer:
                     matriz[z][z+2][i] = caractere_computer
                     tem_vencedor = True
                     nj += 1
                     der += 1
-                    return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))    
+                    return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'), mixer.music.load("defeat.mp3"), mixer.music.play())  
         vit_maq_entb_diag()
     
     def vit_maq_entb_g():
@@ -1015,14 +1040,14 @@ while (continuar_jogando):
                     tem_vencedor = True
                     nj += 1
                     der += 1
-                    return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
+                    return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'), mixer.music.load("defeat.mp3"), mixer.music.play())
                
                 elif matriz[z][i][z+2] == caractere_computer and matriz[z+2][i][z] == caractere_computer:
                     matriz[z+1][i][z+1] = caractere_computer
                     tem_vencedor = True
                     nj += 1
                     der += 1
-                    return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
+                    return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'), mixer.music.load("defeat.mp3"), mixer.music.play())
             
             elif matriz[z+1][i][z+1] == caractere_computer:
                 if matriz[z][i][z] == ' ' and matriz[z+2][i][z+2] == caractere_computer:
@@ -1030,26 +1055,26 @@ while (continuar_jogando):
                     tem_vencedor = True
                     nj += 1
                     der += 1
-                    return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
+                    return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'), mixer.music.load("defeat.mp3"), mixer.music.play())
                 
                 elif matriz[z+2][i][z+2] == ' ' and matriz[z][i][z] == caractere_computer:
                     matriz[z][i][z] = caractere_computer
                     tem_vencedor = True
                     nj += 1
                     der += 1
-                    return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
+                    return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'), mixer.music.load("defeat.mp3"), mixer.music.play())
                 elif matriz[z][i][z+2] == ' ' and matriz[z+2][i][z] == caractere_computer:
                     matriz[z][i][z+2] = caractere_computer
                     tem_vencedor = True
                     nj += 1
                     der += 1
-                    return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
+                    return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'), mixer.music.load("defeat.mp3"), mixer.music.play())
                 elif matriz[z+2][i][z] == ' ' and matriz[z][i][z+2] == caractere_computer:
                     matriz[z+2][i][z] = caractere_computer
                     tem_vencedor = True
                     nj += 1
                     der += 1
-                    return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
+                    return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'), mixer.music.load("defeat.mp3"), mixer.music.play())
         vit_maq_entb_mc()
     
     def vitoria_maquina_entb():
@@ -1063,7 +1088,7 @@ while (continuar_jogando):
                         tem_vencedor = True
                         nj += 1
                         der += 1
-                        return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
+                        return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'), mixer.music.load("defeat.mp3"), mixer.music.play())
                 
                 elif matriz[z+1][i][j] == ' ':
                     if matriz[z][i][j] == caractere_computer and matriz[z+2][i][j] == caractere_computer:
@@ -1071,7 +1096,7 @@ while (continuar_jogando):
                         tem_vencedor = True
                         nj += 1
                         der += 1
-                        return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
+                        return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'), mixer.music.load("defeat.mp3"), mixer.music.play())
                 
                 elif matriz[z+2][i][j] == ' ':
                     if matriz[z][i][j] == caractere_computer and matriz[z+1][i][j] == caractere_computer:
@@ -1079,7 +1104,7 @@ while (continuar_jogando):
                         tem_vencedor = True
                         nj += 1
                         der += 1
-                        return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
+                        return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'), mixer.music.load("defeat.mp3"), mixer.music.play())
         vit_maq_entb_g()
     
     def vitoria_maquina_diag():
@@ -1092,38 +1117,39 @@ while (continuar_jogando):
                     tem_vencedor = True
                     nj += 1
                     der += 1
-                    return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
+                    return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'), mixer.music.load("defeat.mp3"), mixer.music.play())
                 if matriz[i][0][2] == caractere_computer and matriz[i][2][0] == caractere_computer:
                     matriz[i][1][1] = caractere_computer
                     tem_vencedor = True
                     nj += 1
                     der += 1
-                    return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
+                    return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'), mixer.music.load("defeat.mp3"), mixer.music.play())
             elif matriz[i][1][1] == caractere_computer:
                 if matriz[i][0][0] == caractere_computer and matriz[i][2][2] == ' ':
                     matriz[i][2][2] = caractere_computer
                     tem_vencedor = True
                     nj += 1
                     der += 1
-                    return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
+                    return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'), mixer.music.load("defeat.mp3"), mixer.music.play())
+
                 elif matriz[i][2][2] == caractere_computer and matriz[i][0][0] == ' ':
                     matriz[i][0][0] = caractere_computer
                     tem_vencedor = True
                     nj += 1
                     der += 1
-                    return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
+                    return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'), mixer.music.load("defeat.mp3"), mixer.music.play())
                 elif matriz[i][0][2] == caractere_computer and matriz[i][2][0] == ' ':
                     matriz[i][2][0] = caractere_computer
                     tem_vencedor = True
                     nj += 1
                     der += 1
-                    return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
+                    return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'), mixer.music.load("defeat.mp3"), mixer.music.play())
                 elif matriz[i][2][0] == caractere_computer and matriz[i][0][2] == ' ':
                     matriz[i][0][2] = caractere_computer
                     tem_vencedor = True
                     nj += 1
                     der += 1
-                    return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
+                    return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'), mixer.music.load("defeat.mp3"), mixer.music.play())
         vitoria_maquina_entb()
     
     def vitoria_maquina_lin():
@@ -1137,21 +1163,21 @@ while (continuar_jogando):
                         tem_vencedor = True
                         nj += 1
                         der += 1
-                        return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
+                        return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'), mixer.music.load("defeat.mp3"), mixer.music.play())
                 elif matriz[i][z+1][j] == ' ':
                     if matriz[i][z][j] == caractere_computer and matriz[i][z+2][j] == caractere_computer:
                         matriz[i][z+1][j] = caractere_computer
                         tem_vencedor = True
                         nj += 1
                         der += 1
-                        return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
+                        return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'), mixer.music.load("defeat.mp3"), mixer.music.play())
                 elif matriz[i][z+2][j] == ' ':
                     if matriz[i][z][j] == caractere_computer and matriz[i][z+1][j] == caractere_computer:
                         matriz[i][z+2][j] = caractere_computer
                         tem_vencedor = True
                         nj += 1
                         der += 1
-                        return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
+                        return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'), mixer.music.load("defeat.mp3"), mixer.music.play())
         vitoria_maquina_diag()
     
     def jogada_maquina():
@@ -1165,21 +1191,21 @@ while (continuar_jogando):
                         tem_vencedor = True
                         nj += 1
                         der += 1
-                        return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
+                        return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'), mixer.music.load("defeat.mp3"), mixer.music.play())
                 elif matriz[i][j][z+1] == ' ':
                     if matriz[i][j][z] == caractere_computer and matriz[i][j][z+2] == caractere_computer:
                         matriz[i][j][z+1] = caractere_computer
                         tem_vencedor = True
                         nj += 1
                         der += 1
-                        return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
+                        return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'), mixer.music.load("defeat.mp3"), mixer.music.play())
                 elif matriz[i][j][z+2] == ' ':
                     if matriz[i][j][z] == caractere_computer and matriz[i][j][z+1] == caractere_computer:
                         matriz[i][j][z+2] = caractere_computer
                         tem_vencedor = True
                         nj += 1
                         der += 1
-                        return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'))
+                        return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'), mixer.music.load("defeat.mp3"), mixer.music.play())
         vitoria_maquina_lin()
 
 
