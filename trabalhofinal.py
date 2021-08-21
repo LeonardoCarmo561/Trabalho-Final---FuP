@@ -82,19 +82,19 @@ while (continuar_jogando):
         if matriz[1][1][1] == caractere_player:
             if matriz[0][0][0] == caractere_player and matriz[2][2][2] == caractere_player:
                 tem_vencedor = True
-                return (imprimir_tabuleiro(), print('VOCÊ VENCEU'))
+                return (imprimir_tabuleiro(), print('VOCÊ VENCEU'), mixer.music.load("victory.mp3"), mixer.music.play())
 
             elif matriz[0][0][2] == caractere_player and matriz[2][2][0] == caractere_player:
                 tem_vencedor = True
-                return (imprimir_tabuleiro(), print('VOCÊ VENCEU'))
+                return (imprimir_tabuleiro(), print('VOCÊ VENCEU'), mixer.music.load("victory.mp3"), mixer.music.play())
 
             elif matriz[0][2][0] == caractere_player and matriz[2][0][2] == caractere_player:
                 tem_vencedor = True
-                return (imprimir_tabuleiro(), print('VOCÊ VENCEU'))
+                return (imprimir_tabuleiro(), print('VOCÊ VENCEU'), mixer.music.load("victory.mp3"), mixer.music.play())
 
             elif matriz[0][2][2] == caractere_player and matriz[2][0][0] == caractere_player:
                 tem_vencedor = True
-                return (imprimir_tabuleiro(), print('VOCÊ VENCEU'))
+                return (imprimir_tabuleiro(), print('VOCÊ VENCEU'), mixer.music.load("victory.mp3"), mixer.music.play())
 
     def vit_jog_entb_mc():
         z = 0
@@ -103,11 +103,11 @@ while (continuar_jogando):
             if matriz[z+1][z+1][i] == caractere_player:
                 if matriz[z][z][i] == caractere_player and matriz[z+2][z+2][i] == caractere_player:
                     tem_vencedor = True
-                    return (imprimir_tabuleiro(), print('VOCÊ VENCEU'))
+                    return (imprimir_tabuleiro(), print('VOCÊ VENCEU'), mixer.music.load("victory.mp3"), mixer.music.play())
                 
                 elif matriz[z+2][z][i] == caractere_player and matriz[z][z+2][i] == caractere_player:
                     tem_vencedor = True
-                    return (imprimir_tabuleiro(), print('VOCÊ VENCEU'))
+                    return (imprimir_tabuleiro(), print('VOCÊ VENCEU'), mixer.music.load("victory.mp3"), mixer.music.play())
             
         vit_jog_entb_diag()
         
@@ -118,12 +118,12 @@ while (continuar_jogando):
             if matriz[z+1][i][z+1] == caractere_player:
                 if matriz[z][i][z] == caractere_player and matriz[z+2][i][z+2] == caractere_player:
                     tem_vencedor = True
-                    return (imprimir_tabuleiro(), print('VOCÊ VENCEU'))
+                    return (imprimir_tabuleiro(), print('VOCÊ VENCEU'), mixer.music.load("victory.mp3"), mixer.music.play())
                 
                 elif matriz[z][i][z+2] == caractere_player and matriz[z+2][i][z] == caractere_player:
                     tem_vencedor = True
                     vit  += 1
-                    return (imprimir_tabuleiro(), print('VOCÊ VENCEU'))
+                    return (imprimir_tabuleiro(), print('VOCÊ VENCEU'), mixer.music.load("victory.mp3"), mixer.music.play())
             
         vit_jog_entb_mc()
         
@@ -135,17 +135,17 @@ while (continuar_jogando):
                 if matriz[z][i][j] == caractere_player:
                     if matriz[z+1][i][j] == caractere_player and matriz[z+2][i][j] == caractere_player:
                         tem_vencedor = True
-                        return (imprimir_tabuleiro(), print('VOCÊ VENCEU'))
+                        return (imprimir_tabuleiro(), print('VOCÊ VENCEU'), mixer.music.load("victory.mp3"), mixer.music.play())
                 
                 elif matriz[z+1][i][j] == caractere_player:
                     if matriz[z][i][j] == caractere_player and matriz[z+2][i][j] == caractere_player:
                         tem_vencedor = True
-                        return (imprimir_tabuleiro(), print('VOCÊ VENCEU'))
+                        return (imprimir_tabuleiro(), print('VOCÊ VENCEU'), mixer.music.load("victory.mp3"), mixer.music.play())
                 
                 elif matriz[z+2][i][j] == caractere_player:
                     if matriz[z][i][j] == caractere_player and matriz[z+1][i][j] == caractere_player:
                         tem_vencedor = True
-                        return (imprimir_tabuleiro(), print('VOCÊ VENCEU'))
+                        return (imprimir_tabuleiro(), print('VOCÊ VENCEU'), mixer.music.load("victory.mp3"), mixer.music.play())
         vit_jog_entb_g()
         
     def vitoria_jogador_diag():
@@ -155,11 +155,11 @@ while (continuar_jogando):
             if matriz[i][1][1] == caractere_player:
                 if matriz[i][0][0] == caractere_player and matriz[i][2][2] == caractere_player:
                     tem_vencedor = True
-                    return (imprimir_tabuleiro(), print('VOCÊ VENCEU'))
+                    return (imprimir_tabuleiro(), print('VOCÊ VENCEU'), mixer.music.load("victory.mp3"), mixer.music.play())
                 
                 if matriz[i][0][2] == caractere_player and matriz[i][2][0] == caractere_player:
                     tem_vencedor = True
-                    return (imprimir_tabuleiro(), print('VOCÊ VENCEU'))
+                    return (imprimir_tabuleiro(), print('VOCÊ VENCEU'), mixer.music.load("victory.mp3"), mixer.music.play())
                         
         vitoria_jogador_entb()
         
@@ -171,17 +171,17 @@ while (continuar_jogando):
                 if matriz[i][z][j] == caractere_player:
                     if matriz[i][z+1][j] == caractere_player and matriz[i][z+2][j] == caractere_player:
                         tem_vencedor = True
-                        return (imprimir_tabuleiro(), print('VOCÊ VENCEU'))
+                        return (imprimir_tabuleiro(), print('VOCÊ VENCEU'), mixer.music.load("victory.mp3"), mixer.music.play())
                     
                 elif matriz[i][z+1][j] == caractere_player:
                     if matriz[i][z][j] == caractere_player and matriz[i][z+2][j] == caractere_player:
                         tem_vencedor = True
-                        return (imprimir_tabuleiro(), print('VOCÊ VENCEU'))
+                        return (imprimir_tabuleiro(), print('VOCÊ VENCEU'), mixer.music.load("victory.mp3"), mixer.music.play())
                     
                 elif matriz[i][z+2][j] == caractere_player:
                     if matriz[i][z][j] == caractere_player and matriz[i][z+1][j] == caractere_player:
                         tem_vencedor = True
-                        return (imprimir_tabuleiro(), print('VOCÊ VENCEU'))
+                        return (imprimir_tabuleiro(), print('VOCÊ VENCEU'), mixer.music.load("victory.mp3"), mixer.music.play())
         vitoria_jogador_diag()
         
     def vitoria_jogador():
@@ -192,17 +192,17 @@ while (continuar_jogando):
                 if matriz[i][j][z] == caractere_player:
                     if matriz[i][j][z+1] == caractere_player and matriz[i][j][z+2] == caractere_player:
                         tem_vencedor = True
-                        return (imprimir_tabuleiro(), print('VOCÊ VENCEU'))
+                        return (imprimir_tabuleiro(), print('VOCÊ VENCEU'), mixer.music.load("victory.mp3"), mixer.music.play())
                         
                 elif matriz[i][j][z+1] == caractere_player:
                     if matriz[i][j][z] == caractere_player and matriz[i][j][z+2] == caractere_player:
                         tem_vencedor = True
-                        return (imprimir_tabuleiro(), print('VOCÊ VENCEU'))
+                        return (imprimir_tabuleiro(), print('VOCÊ VENCEU'), mixer.music.load("victory.mp3"), mixer.music.play())
                         
                 elif matriz[i][j][z+2] == caractere_player:
                     if matriz[i][j][z] == caractere_player and matriz[i][j][z+1] == caractere_player:
                         tem_vencedor = True
-                        return (imprimir_tabuleiro(), print('VOCÊ VENCEU'))
+                        return (imprimir_tabuleiro(), print('VOCÊ VENCEU'), mixer.music.load("victory.mp3"), mixer.music.play())
         vitoria_jogador_lin()
 
     # endd
