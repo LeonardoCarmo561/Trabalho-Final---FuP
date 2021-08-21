@@ -1204,7 +1204,6 @@ while (continuar_jogando):
 
     if count == der:
         vit += 1
-    print(vit, der, emp)
 
 
     # Pergunta-se ao usuário se ele deseja continuar jogando
