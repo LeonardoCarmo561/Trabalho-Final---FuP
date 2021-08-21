@@ -1,5 +1,7 @@
 import random as r
-
+vit = 0
+der = 0
+emp = 0
 continuar_jogando = True
 while (continuar_jogando):
     caractere_player = input("Deseja jogar com X ou O? ")
@@ -55,7 +57,155 @@ while (continuar_jogando):
 
         # Mostrando o tabuleiro
         print("Dentro da jogada do usuario")
-        imprimir_tabuleiro()
+        return (vitoria_jogador(), imprimir_tabuleiro())
+
+    # Condição de vitória do jogador
+
+    def vit_jog_entb_diag():
+        global tem_vencedor, vit
+        if matriz[1][1][1] == caractere_player:
+            if matriz[0][0][0] == caractere_player and matriz[2][2][2] == caractere_player:
+                tem_vencedor = True
+                vit += 1
+                return (imprimir_tabuleiro(), print('VOCÊ VENCEU'))
+
+            elif matriz[0][0][2] == caractere_player and matriz[2][2][0] == caractere_player:
+                tem_vencedor = True
+                vit += 1
+                return (imprimir_tabuleiro(), print('VOCÊ VENCEU'))
+
+            elif matriz[0][2][0] == caractere_player and matriz[2][0][2] == caractere_player:
+                tem_vencedor = True
+                vit += 1
+                return (imprimir_tabuleiro(), print('VOCÊ VENCEU'))
+
+            elif matriz[0][2][2] == caractere_player and matriz[2][0][0] == caractere_player:
+                tem_vencedor = True
+                vit += 1
+                return (imprimir_tabuleiro(), print('VOCÊ VENCEU'))
+
+    def vit_jog_entb_mc():
+        z = 0
+        global tem_vencedor, vit
+        for i in range (0, 3):
+            if matriz[z+1][z+1][i] == caractere_player:
+                if matriz[z][z][i] == caractere_player and matriz[z+2][z+2][i] == caractere_player:
+                    tem_vencedor = True
+                    vit += 1
+                    return (imprimir_tabuleiro(), print('VOCÊ VENCEU'))
+                
+                elif matriz[z+2][z][i] == caractere_player and matriz[z][z+2][i] == caractere_player:
+                    tem_vencedor = True
+                    return (imprimir_tabuleiro(), print('VOCÊ VENCEU'))
+              
+        vit_jog_entb_diag()
+    
+    def vit_jog_entb_g():
+        z = 0
+        global tem_vencedor, vit
+        for i in range (0, 3):
+            if matriz[z+1][i][z+1] == caractere_player:
+                if matriz[z][i][z] == caractere_player and matriz[z+2][i][z+2] == caractere_player:
+                    tem_vencedor = True
+                    vit += 1
+                    return (imprimir_tabuleiro(), print('VOCÊ VENCEU'))
+                
+                elif matriz[z][i][z+2] == caractere_player and matriz[z+2][i][z] == caractere_player:
+                    tem_vencedor = True
+                    vit  += 1
+                    return (imprimir_tabuleiro(), print('VOCÊ VENCEU'))
+            
+        vit_jog_entb_mc()
+    
+    def vitoria_jogador_entb():
+        global tem_vencedor, vit
+        for i in range(0, 3):
+            for j in range (0, 3):
+                z = 0
+                if matriz[z][i][j] == caractere_player:
+                    if matriz[z+1][i][j] == caractere_player and matriz[z+2][i][j] == caractere_player:
+                        tem_vencedor = True
+                        vit += 1
+                        return (imprimir_tabuleiro(), print('VOCÊ VENCEU'))
+                
+                elif matriz[z+1][i][j] == caractere_player:
+                    if matriz[z][i][j] == caractere_player and matriz[z+2][i][j] == caractere_player:
+                        tem_vencedor = True
+                        vit += 1
+                        return (imprimir_tabuleiro(), print('VOCÊ VENCEU'))
+                
+                elif matriz[z+2][i][j] == caractere_player:
+                    if matriz[z][i][j] == caractere_player and matriz[z+1][i][j] == caractere_player:
+                        tem_vencedor = True
+                        vit += 1
+                        return (imprimir_tabuleiro(), print('VOCÊ VENCEU'))
+        vit_jog_entb_g()
+    
+    def vitoria_jogador_diag():
+        global tem_vencedor, vit
+        for i in range(0, 3):
+            z = 0
+            if matriz[i][1][1] == caractere_player:
+                if matriz[i][0][0] == caractere_player and matriz[i][2][2] == caractere_player:
+                    tem_vencedor = True
+                    vit += 1
+                    return (imprimir_tabuleiro(), print('VOCÊ VENCEU'))
+                
+                if matriz[i][0][2] == caractere_player and matriz[i][2][0] == caractere_player:
+                    tem_vencedor = True
+                    return (imprimir_tabuleiro(), print('VOCÊ VENCEU'))
+
+        vitoria_jogador_entb()
+    
+    def vitoria_jogador_lin():
+        global tem_vencedor, vit
+        for i in range(0, 3):
+            for j in range (0, 3):
+                z = 0
+                if matriz[i][z][j] == caractere_player:
+                    if matriz[i][z+1][j] == caractere_player and matriz[i][z+2][j] == caractere_player:
+                        tem_vencedor = True
+                        vit += 1
+                        return (imprimir_tabuleiro(), print('VOCÊ VENCEU'))
+                    
+                elif matriz[i][z+1][j] == caractere_player:
+                    if matriz[i][z][j] == caractere_player and matriz[i][z+2][j] == caractere_player:
+                        tem_vencedor = True
+                        vit += 1
+                        return (imprimir_tabuleiro(), print('VOCÊ VENCEU'))
+                    
+                elif matriz[i][z+2][j] == caractere_player:
+                    if matriz[i][z][j] == caractere_player and matriz[i][z+1][j] == caractere_player:
+                        tem_vencedor = True
+                        vit += 1
+                        return (imprimir_tabuleiro(), print('VOCÊ VENCEU'))
+        vitoria_jogador_diag()
+    
+    def vitoria_jogador():
+        global tem_vencedor, vit
+        for i in range (0, 3):
+            for j in range (0, 3):
+                z = 0
+                if matriz[i][j][z] == caractere_player:
+                    if matriz[i][j][z+1] == caractere_player and matriz[i][j][z+2] == caractere_player:
+                        tem_vencedor = True
+                        vit += 1
+                        return (imprimir_tabuleiro(), print('VOCÊ VENCEU'))
+                    
+                elif matriz[i][j][z+1] == caractere_player:
+                    if matriz[i][j][z] == caractere_player and matriz[i][j][z+2] == caractere_player:
+                        tem_vencedor = True
+                        vit += 1
+                        return (imprimir_tabuleiro(), print('VOCÊ VENCEU'))
+                    
+                elif matriz[i][j][z+2] == caractere_player:
+                    if matriz[i][j][z] == caractere_player and matriz[i][j][z+1] == caractere_player:
+                        tem_vencedor = True
+                        vit += 1
+                        return (imprimir_tabuleiro(), print('VOCÊ VENCEU'))
+        vitoria_jogador_lin()
+
+    # endd
 
     
     # Função para a quinta condição da jogada do computador
@@ -203,7 +353,7 @@ while (continuar_jogando):
                 for k in range(3):
                     if casas_pode_jogar[i][j][k] == True:
                         matriz[i][j][k] = caractere_computer
-                        return (print("Cod 4") ,imprimir_tabuleiro())
+                        return imprimir_tabuleiro()
         jogada_do_computador_cod_5()
   
 
@@ -682,19 +832,22 @@ while (continuar_jogando):
 
 
     # Primeira jogada do computador
-    jogada_do_computador_cod_4()
-
+    jogada_maquina()
+    '''
     # Segunda jogada do usuário
     jogada_do_usuario()
 
-    # Segunda jogada do xomputador
+    # Segunda jogada do computador
 
     jogada_maquina()
     # jogada_maquina()
-
+    '''
     while tem_vencedor == False:
         jogada_do_usuario()
-        jogada_maquina()
+        if tem_vencedor == True:
+            break
+        else:
+            jogada_maquina()
 
 
 
@@ -705,6 +858,4 @@ while (continuar_jogando):
         cj = input("Deseja continuar jogando? (Digite S para sim e N para não): ")
     if cj == "N":
         continuar_jogando = False
-
-
 
