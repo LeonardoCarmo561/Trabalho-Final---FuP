@@ -216,7 +216,7 @@ while (continuar_jogando):
 
         imprimir_tabuleiro()
 
-
+    # Quarta condição
     def jogada_do_computador_cod_4():
         global nj
         casas_pode_jogar = [[[True, True, True]for i in range(3)]for j in range(3) ]
@@ -363,6 +363,286 @@ while (continuar_jogando):
 
 
 
+    # Condiçao 3
+
+    def jog_maq_entb_diag_op3():
+        global nj
+        if matriz[1][1][1] == ' ':
+            if matriz[0][0][0] == ' ' and matriz[2][2][2] == caractere_computer:
+                matriz[1][1][1] = caractere_computer
+                nj += 1
+                return imprimir_tabuleiro()
+            elif matriz[0][0][0] == caractere_computer and matriz[2][2][2] == ' ':
+                matriz[1][1][1] = caractere_computer
+                nj += 1
+                return imprimir_tabuleiro()
+            
+            elif matriz[0][0][2] == ' ' and matriz[2][2][0] == caractere_computer:
+                matriz[1][1][1] = caractere_computer
+                nj += 1
+                return imprimir_tabuleiro()
+            elif matriz[0][0][2] == caractere_computer and matriz[2][2][0] == ' ':
+                matriz[1][1][1] = caractere_computer
+                nj += 1
+                return imprimir_tabuleiro()
+            
+            elif matriz[0][2][0] == ' ' and matriz[2][0][2] == caractere_computer:
+                matriz[1][1][1] = caractere_computer
+                nj += 1
+                return imprimir_tabuleiro()
+            elif matriz[0][2][0] == caractere_computer and matriz[2][0][2] == ' ':
+                matriz[1][1][1] = caractere_computer
+                nj += 1
+                return imprimir_tabuleiro()
+            
+            elif matriz[0][2][2] == ' ' and matriz[2][0][0] == caractere_computer:
+                matriz[1][1][1] = caractere_computer
+                nj += 1
+                return imprimir_tabuleiro()
+            elif matriz[0][2][2] == caractere_computer and matriz[2][0][0] == ' ':
+                matriz[1][1][1] = caractere_computer
+                nj += 1
+                return imprimir_tabuleiro()
+            
+        elif matriz[1][1][1] == caractere_computer:
+            if matriz[0][0][0] == ' ' and matriz[2][2][2] == ' ':
+                matriz[0][0][0] = caractere_computer
+                nj += 1
+                return imprimir_tabuleiro()
+            
+            elif matriz[0][0][2] == ' ' and matriz[2][2][0] == ' ':
+                matriz[0][0][2] = caractere_computer
+                nj += 1
+                return imprimir_tabuleiro()
+            
+            elif matriz[0][2][0] == ' ' and matriz[2][0][2] == ' ':
+                matriz[0][2][0] = caractere_computer
+                nj += 1
+                return imprimir_tabuleiro()
+            
+            elif matriz[0][2][2] == ' ' and matriz[2][0][0] == ' ':
+                matriz[0][2][2] = caractere_computer
+                nj += 1
+                return imprimir_tabuleiro()
+
+        jogada_do_computador_cod_4()
+        
+
+    def jog_maq_entb_mc_op3():
+        global nj
+        z = 0
+        for i in range (0, 3):
+            if matriz[z+1][z+1][i] == ' ':
+                if matriz[z][z][i] == ' ' and matriz[z+2][z+2][i] == caractere_computer:
+                    matriz[z+1][z+1][i] = caractere_computer
+                    nj += 1
+                    return imprimir_tabuleiro()
+                elif matriz[z][z][i] == caractere_computer and matriz[z+2][z+2][i] == ' ':
+                    matriz[z+1][z+1][i] = caractere_computer
+                    nj += 1
+                    return imprimir_tabuleiro()
+                
+                elif matriz[z+2][z][i] == ' ' and matriz[z][z+2][i] == caractere_computer:
+                    matriz[z+1][z+1][i] = caractere_computer
+                    nj += 1
+                    return imprimir_tabuleiro()
+                elif matriz[z+2][z][i] == caractere_computer and matriz[z][z+2][i] == ' ':
+                    matriz[z+1][z+1][i] = caractere_computer
+                    nj += 1
+                    return imprimir_tabuleiro()
+                
+            elif matriz[z+1][z+1][i] == caractere_player:
+                if matriz[z][z][i] == ' ' and matriz[z+2][z+2][i] == ' ':
+                    matriz[z][z][i] = caractere_computer
+                    nj += 1
+                    return imprimir_tabuleiro()
+                
+                elif matriz[z+2][z][i] == ' ' and matriz[z][z+2][i] == ' ':
+                    matriz[z+2][z][i] = caractere_computer
+                    nj += 1
+                    return imprimir_tabuleiro()
+        jog_maq_entb_diag_op3()
+
+
+    def jog_maq_entb_g_op3():
+        global nj
+        z = 0
+        for i in range (0, 3):
+            if matriz[z+1][i][z+1] == ' ':
+                if matriz[z][i][z] == ' ' and matriz[z+2][i][z+2] == caractere_computer:
+                    matriz[z+1][i][z+1] = caractere_computer
+                    nj += 1
+                    return imprimir_tabuleiro()
+                elif matriz[z][i][z] == caractere_computer and matriz[z+2][i][z+2] == ' ':
+                    matriz[z+1][i][z+1] = caractere_computer
+                    nj += 1
+                    return imprimir_tabuleiro()
+                
+                elif matriz[z][i][z+2] == caractere_computer and matriz[z+2][i][z] == ' ':
+                    matriz[z+1][i][z+1] = caractere_computer
+                    nj += 1
+                    return imprimir_tabuleiro()
+                elif matriz[z][i][z+2] == ' ' and matriz[z+2][i][z] == caractere_computer:
+                    matriz[z+1][i][z+1] = caractere_computer
+                    nj += 1
+                    return imprimir_tabuleiro()
+                
+            elif matriz[z+1][i][z+1] == caractere_computer:
+                if matriz[z][i][z] == ' ' and matriz[z+2][i][z+2] == ' ':
+                    matriz[z][i][z] = caractere_computer
+                    nj += 1
+                    return imprimir_tabuleiro()
+                
+                elif matriz[z][i][z+2] == ' ' and matriz[z+2][i][z] == ' ':
+                    matriz[z][i][z+2] = caractere_computer
+                    nj += 1
+                    return imprimir_tabuleiro()
+        jog_maq_entb_mc_op3()
+
+    def jogada_maquina_entb_op3():
+        global nj
+        for i in range(0, 3):
+            for j in range (0, 3):
+                z = 0
+                if matriz[z][i][j] == ' ':
+                    if matriz[z+1][i][j] == ' ' and matriz[z+2][i][j] == caractere_computer:
+                        matriz[z][i][j] = caractere_computer
+                        nj += 1
+                        return imprimir_tabuleiro()
+                    elif matriz[z+1][i][j] == caractere_computer and matriz[z+2][i][j] == ' ':
+                        matriz[z][i][j] = caractere_computer
+                        nj += 1
+                        return imprimir_tabuleiro()
+                    
+                elif matriz[z+1][i][j] == ' ':
+                    if matriz[z][i][j] == ' ' and matriz[z+2][i][j] == caractere_computer:
+                        matriz[z+1][i][j] = caractere_computer
+                        nj += 1
+                        return imprimir_tabuleiro()
+                    elif matriz[z][i][j] == caractere_computer and matriz[z+2][i][j] == ' ':
+                        matriz[z+1][i][j] = caractere_computer
+                        nj += 1
+                        return imprimir_tabuleiro()
+                    
+                elif matriz[z+2][i][j] == ' ':
+                    if matriz[z][i][j] == ' ' and matriz[z+1][i][j] == caractere_computer:
+                        matriz[z+2][i][j] = caractere_computer
+                        nj += 1
+                        return imprimir_tabuleiro()
+                    elif matriz[z][i][j] == caractere_computer and matriz[z+1][i][j] == ' ':
+                        matriz[z+2][i][j] = caractere_computer
+                        nj += 1
+                        return imprimir_tabuleiro()
+        jog_maq_entb_g_op3()
+
+    def jogada_maquina_diag_op3():
+        global nj
+        z = 0
+        for i in range(0, 3):
+            if matriz[i][1][1] == ' ':
+                if matriz[i][0][0] == ' ' and matriz[i][2][2] == caractere_computer:
+                    matriz[i][1][1] = caractere_computer
+                    nj += 1
+                    return imprimir_tabuleiro()
+                elif matriz[i][0][0] == caractere_computer and matriz[i][2][2] == ' ':
+                    matriz[i][1][1] = caractere_computer
+                    nj += 1
+                    return imprimir_tabuleiro()
+                
+                elif matriz[i][0][2] == ' ' and matriz[i][2][0] == caractere_computer:
+                    matriz[i][1][1] = caractere_computer
+                    nj += 1
+                    return imprimir_tabuleiro()
+                elif matriz[i][0][2] == caractere_computer and matriz[i][2][0] == ' ':
+                    matriz[i][1][1] = caractere_computer
+                    nj += 1
+                    return imprimir_tabuleiro()
+                
+            elif matriz[i][1][1] == caractere_computer:
+                if matriz[i][0][0] == ' ' and matriz[i][2][2] == ' ':
+                    matriz[i][2][2] = caractere_computer
+                    nj += 1
+                    return imprimir_tabuleiro()
+                
+                elif matriz[i][0][2] == ' ' and matriz[i][2][0] == ' ':
+                    matriz[i][2][0] = caractere_computer
+                    nj += 1
+                    return imprimir_tabuleiro()
+        jogada_maquina_entb_op3()
+
+    def jogada_maquina_lin_op3():
+        global nj
+        z = 0
+        for i in range(0, 3):
+            for j in range (0, 3):
+                if matriz[i][z][j] == ' ':
+                    if matriz[i][z+1][j] == ' ' and matriz[i][z+2][j] == caractere_computer:
+                        matriz[i][z][j] = caractere_computer
+                        nj += 1
+                        return imprimir_tabuleiro()
+                    elif matriz[i][z+1][j] == caractere_computer and matriz[i][z+2][j] == ' ':
+                        matriz[i][z][j] = caractere_computer
+                        nj += 1
+                        return imprimir_tabuleiro()
+                
+                elif matriz[i][z+1][j] == ' ':
+                    if matriz[i][z][j] == ' ' and matriz[i][z+2][j] == caractere_computer:
+                        matriz[i][z+1][j] = caractere_computer
+                        nj += 1
+                        return imprimir_tabuleiro()
+                    elif matriz[i][z][j] == caractere_computer and matriz[i][z+2][j] == caractere_computer:
+                        matriz[i][z+1][j] = caractere_computer
+                        nj += 1
+                        return imprimir_tabuleiro()
+                    
+                elif matriz[i][z+2][j] == ' ':
+                    if matriz[i][z][j] == caractere_player and matriz[i][z+1][j] == ' ':
+                        matriz[i][z+2][j] = caractere_computer
+                        nj += 1
+                        return imprimir_tabuleiro()
+                    elif matriz[i][z][j] == ' ' and matriz[i][z+1][j] == caractere_computer:
+                        matriz[i][z+2][j] = caractere_computer
+                        nj += 1
+                        return imprimir_tabuleiro()
+        jogada_maquina_diag_op3()
+
+    def jogada_maquina_op3():
+        global nj
+        z = 0
+        for i in range (0, 3):
+            for j in range (0, 3):
+                if matriz[i][j][z] == ' ':
+                    if matriz[i][j][z+1] == ' ' and matriz[i][j][z+2] == caractere_computer:
+                        matriz[i][j][z] = caractere_computer
+                        nj += 1
+                        return (imprimir_tabuleiro())
+                    elif matriz[i][j][z+1] == caractere_computer and matriz[i][j][z+2] == ' ':
+                        matriz[i][j][z] = caractere_computer
+                        nj += 1
+                        return (imprimir_tabuleiro())
+                    
+                elif matriz[i][j][z+1] == ' ':
+                    if matriz[i][j][z] == ' ' and matriz[i][j][z+2] == caractere_computer:
+                        matriz[i][j][z+1] = caractere_computer
+                        nj += 1
+                        return imprimir_tabuleiro()
+                    elif matriz[i][j][z] == caractere_computer and matriz[i][j][z+2] == ' ':
+                        matriz[i][j][z+1] = caractere_computer
+                        nj += 1
+                        return imprimir_tabuleiro()
+                    
+                elif matriz[i][j][z+2] == ' ':
+                    if matriz[i][j][z] == caractere_player and matriz[i][j][z+1] == ' ':
+                        matriz[i][j][z+2] = caractere_computer
+                        nj += 1
+                        return imprimir_tabuleiro()
+                    elif matriz[i][j][z] == ' ' and matriz[i][j][z+1] == caractere_computer:
+                        matriz[i][j][z+2] = caractere_computer
+                        nj += 1
+                        return imprimir_tabuleiro()
+        jogada_maquina_lin_op3()
+
+    #cabouu
 
 
 
@@ -370,15 +650,7 @@ while (continuar_jogando):
 
 
 
-
-
-
-
-
-
-
-
-    #jogada do cmoputador opção 2
+    #jogada do computador opção 2
     def jog_maq_entb_diag():
         global nj
         if matriz[1][1][1] == ' ':
@@ -435,7 +707,7 @@ while (continuar_jogando):
                 nj += 1
                 return imprimir_tabuleiro()
 
-        jogada_do_computador_cod_4()
+        jogada_maquina_op3()
         
     
     def jog_maq_entb_mc():
@@ -925,6 +1197,7 @@ while (continuar_jogando):
             break
         else:
             jogada_maquina()
+
     if nj == 27:
         emp += 1
     
