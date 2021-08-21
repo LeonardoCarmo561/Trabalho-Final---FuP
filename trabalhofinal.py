@@ -16,9 +16,11 @@ while (continuar_jogando):
         caractere_player = input("Deseja jogar com X ou O? ")
 
     if caractere_player == 'X':
-        caractere_computer = "O"
+        caractere_player = '\033[1;91mX'
+        caractere_computer = '\033[1;34mO'
     else:
-        caractere_computer = 'X'
+        caractere_computer = '\033[1;91mX'
+        caractere_player = '\033[1;34mO'
 
     # Criando o tabuleiro
     matriz = [ [[' ',' ',' ']for i in range(3)]for j in range(3) ]
@@ -26,13 +28,13 @@ while (continuar_jogando):
     tem_vencedor = False
 
     def imprimir_tabuleiro():
-        print("  CAMADA  1       CAMADA  2       CAMADA  3")
-        print("  1   2   3       1   2   3       1   2   3")
-        print("1 %s | %s | %s 1   1 %s | %s | %s 1   1 %s | %s | %s 1" % (matriz[0][0][0], matriz[0][0][1], matriz[0][0][2], matriz[1][0][0], matriz[1][0][1], matriz[1][0][2], matriz[2][0][0],matriz[2][0][1], matriz[2][0][2]))
-        print(" ---+---+---     ---+---+---     ---+---+---")
-        print("2 %s | %s | %s 2   2 %s | %s | %s 2   2 %s | %s | %s 2" % (matriz[0][1][0], matriz[0][1][1], matriz[0][1][2], matriz[1][1][0], matriz[1][1][1], matriz[1][1][2], matriz[2][1][0],matriz[2][1][1], matriz[2][1][2]))
-        print(" ---+---+---     ---+---+---     ---+---+---")
-        print("3 %s | %s | %s 3   3 %s | %s | %s 3   3 %s | %s | %s 3" % (matriz[0][2][0], matriz[0][2][1], matriz[0][2][2], matriz[1][2][0], matriz[1][2][1], matriz[1][2][2], matriz[2][2][0],matriz[2][2][1], matriz[2][2][2]))
+        print("\033[0;0m  CAMADA  1       CAMADA  2       CAMADA  3")
+        print("\033[0;0m  1   2   3       1   2   3       1   2   3")
+        print("\033[0;0m1 %s \033[0;0m| %s \033[0;0m| %s \033[0;0m1   1 %s \033[0;0m| %s \033[0;0m| %s \033[0;0m1   1 %s \033[0;0m| %s \033[0;0m| %s \033[0;0m1" % (matriz[0][0][0], matriz[0][0][1], matriz[0][0][2], matriz[1][0][0], matriz[1][0][1], matriz[1][0][2], matriz[2][0][0],matriz[2][0][1], matriz[2][0][2]))
+        print("\033[0;0m ---+---+---     ---+---+---     ---+---+---")
+        print("\033[0;0m2 %s \033[0;0m| %s \033[0;0m| %s \033[0;0m2   2 %s \033[0;0m| %s \033[0;0m| %s \033[0;0m2   2 %s \033[0;0m| %s \033[0;0m| %s \033[0;0m2" % (matriz[0][1][0], matriz[0][1][1], matriz[0][1][2], matriz[1][1][0], matriz[1][1][1], matriz[1][1][2], matriz[2][1][0],matriz[2][1][1], matriz[2][1][2]))
+        print("\033[0;0m ---+---+---     ---+---+---     ---+---+---")
+        print("\033[0;0m3 %s \033[0;0m| %s \033[0;0m| %s \033[0;0m3   3 %s \033[0;0m| %s \033[0;0m| %s \033[0;0m3   3 %s \033[0;0m| %s \033[0;0m| %s \033[0;0m3" % (matriz[0][2][0], matriz[0][2][1], matriz[0][2][2], matriz[1][2][0], matriz[1][2][1], matriz[1][2][2], matriz[2][2][0],matriz[2][2][1], matriz[2][2][2]))
         print()
 
     def jogada_do_usuario():
@@ -1212,9 +1214,9 @@ while (continuar_jogando):
     print('quantidade de jogadas do computador:', int(nj/2))
     print()
     print('PLACAR ATÉ AQUI')
-    print('VITÓRIAS:', vit, end='    ')
-    print('DERROTAS:', der, end='    ')
-    print('EMPATES:', emp)
+    print('\033[1;92mVITÓRIAS:', vit, end='    ')
+    print('\033[1;91mDERROTAS:', der, end='    ')
+    print('\033[1;93mEMPATES:', emp, '\033[0;0m')
     cj = input("Deseja continuar jogando? (Digite S para sim e N para não): ")
     while cj != "N" and cj != "S":
         print("Erro, tente novamente.")
