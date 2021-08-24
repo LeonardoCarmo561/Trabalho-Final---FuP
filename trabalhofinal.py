@@ -238,6 +238,9 @@ def jogada_do_computador_cod_5():
 # Quarta condição
 def jogada_do_computador_cod_4():
     global nj
+
+    casas_pode_jogar = [[[True, True, True]for i in range (3)]for j in range(3)]
+
     
     # Verificando em quais casas pode-se jogar
     for i in range(0, 3):
