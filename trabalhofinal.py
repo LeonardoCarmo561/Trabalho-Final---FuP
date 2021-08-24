@@ -3,6 +3,7 @@ from sys import platform
 from pygame import mixer
 import os
 import time
+
 SO = platform
 if SO == 'win32' or 'win':
     def limpar():
@@ -11,6 +12,7 @@ else:
     def limpar():
         os.system('clear')
 limpar()
+
 # install via
 # pip install pygame
 mixer.init()
@@ -18,9 +20,12 @@ mixer.init()
 vit = 0
 der = 0
 emp = 0
+
 # Criando o tabuleiro
 matriz = [ [[' ',' ',' ']for i in range(3)]for j in range(3) ]
 printar = ['Carregando jogada do computador', '.', '.', '.']
+
+# Função para "processar" a jogada do computador
 def carregando():
     contar = 0
     for i in printar:
@@ -29,6 +34,8 @@ def carregando():
         time.sleep(0.8)
         if contar == 4:
             limpar()
+
+# Função para mostrar o jogo na tela
 def imprimir_tabuleiro():
     print("----- JOGO DA VELHA -----")
     print()
@@ -40,7 +47,10 @@ def imprimir_tabuleiro():
     print("\033[0;0m ---+---+---     ---+---+---     ---+---+---")
     print("\033[0;0m3 %s \033[0;0m| %s \033[0;0m| %s \033[0;0m3   3 %s \033[0;0m| %s \033[0;0m| %s \033[0;0m3   3 %s \033[0;0m| %s \033[0;0m| %s \033[0;0m3" % (matriz[0][2][0], matriz[0][2][1], matriz[0][2][2], matriz[1][2][0], matriz[1][2][1], matriz[1][2][2], matriz[2][2][0],matriz[2][2][1], matriz[2][2][2]))
     print()
-#FUÇÕES DE VITÓRIA E JOGADAS
+
+
+#FUNÇÕES DE VITÓRIA E DE JOGADA:
+
 def jogada_do_usuario():
     global nj
     aceitavel = True
@@ -54,13 +64,14 @@ def jogada_do_usuario():
         # Verificando se é uma entrada válida
         if (a >= 1 and a <= 3) and (b >= 1 and b <= 3) and (c >= 1 and c <= 3):
             aceitavel = False
+
+            # Verificando se a casa escolhida está vazia
+            if (matriz[a-1][b-1][c-1] != ' '):
+                print("Esta casa encontra-se preenchida, tente de novo.") 
+                aceitavel = True
+
         else:
             print("Erro, tente novamente.")
-
-        # Verificando se a casa escolhida está vazia
-        if (matriz[a-1][b-1][c-1] != ' '):
-            print("Esta casa encontra-se preenchida, tente de novo.") 
-            aceitavel = True
     
     # Atribuindo ao tabuleiro a jogada do usuário
     matriz[a-1][b-1][c-1] = caractere_player
@@ -72,7 +83,6 @@ def jogada_do_usuario():
     return (imprimir_tabuleiro(), vitoria_jogador())
 
 # Condição de vitória do jogador
-
 def vit_jog_entb_diag():
     global tem_vencedor, vit
     if matriz[1][1][1] == caractere_player:
@@ -178,6 +188,7 @@ def vitoria_jogador_lin():
                 if matriz[i][z][j] == caractere_player and matriz[i][z+1][j] == caractere_player:
                     tem_vencedor = True
                     return (print('VOCÊ VENCEU'), mixer.music.load("victory.mp3"), mixer.music.play())
+
     vitoria_jogador_diag()
     
 def vitoria_jogador():
@@ -199,14 +210,15 @@ def vitoria_jogador():
                 if matriz[i][j][z] == caractere_player and matriz[i][j][z+1] == caractere_player:
                     tem_vencedor = True
                     return (print('VOCÊ VENCEU'), mixer.music.load("victory.mp3"), mixer.music.play())
+
     vitoria_jogador_lin()
-
-# endd
-
+# fim
 
 # Função para a quinta condição da jogada do computador
 def jogada_do_computador_cod_5():
     global nj
+
+    # Gerando a jogada do computador em qualquer casa livre
     aceitavel = True
     while (aceitavel):
         a = r.randint(0, 2)
@@ -219,6 +231,7 @@ def jogada_do_computador_cod_5():
             aceitavel = False
             nj += 1
             matriz[a][b][c] = caractere_computer
+
     carregando()
     imprimir_tabuleiro()
 
@@ -230,8 +243,11 @@ def jogada_do_computador_cod_4():
     for i in range(0, 3):
         for j in range(0, 3):
             for k in range(0, 3):
+
+                # Caso determinada casa não esteja vazia, bloqueia-se as casas pertencentes a mesma coluna, linha ou diagonal
                 if matriz[i][j][k] != ' ':
                     casas_pode_jogar[i][j][k] = False
+
                     # Para uma mesma camada
                     if j == 0:
                         casas_pode_jogar[i][j+1][k] = False
@@ -243,6 +259,7 @@ def jogada_do_computador_cod_4():
                         casas_pode_jogar[i][j-2][k] = False
                         casas_pode_jogar[i][j-1][k] = False
                     
+
                     if k == 0:
                         casas_pode_jogar[i][j][k+1] = False
                         casas_pode_jogar[i][j][k+2] = False
@@ -250,7 +267,6 @@ def jogada_do_computador_cod_4():
                         if j == k:
                             casas_pode_jogar[i][j+1][k+1] = False
                             casas_pode_jogar[i][j+2][k+2] = False
-
 
                     elif k == 1:
                         casas_pode_jogar[i][j][k-1] = False
@@ -273,7 +289,10 @@ def jogada_do_computador_cod_4():
                             casas_pode_jogar[i][j-2][k-2] = False
                             casas_pode_jogar[i][j-1][k-1] = False
 
+
                     # Entre camadas
+
+                    # Camada 1
                     if i == 0:
                         casas_pode_jogar[i+1][j][k] = False
                         casas_pode_jogar[i+2][j][k] = False
@@ -308,7 +327,7 @@ def jogada_do_computador_cod_4():
                                 casas_pode_jogar[1][1][1] = False
                                 casas_pode_jogar[2][0][0] = False
                     
-
+                    # Camada 2
                     elif i == 1:
                         casas_pode_jogar[i-1][j][k] = False
                         casas_pode_jogar[i+1][j][k] = False
@@ -336,7 +355,7 @@ def jogada_do_computador_cod_4():
                                 casas_pode_jogar[2][1][0] = False
                                 casas_pode_jogar[2][1][2] = False
                         
-                    
+                    # Camada 3
                     else:
                         casas_pode_jogar[i-2][j][k] = False
                         casas_pode_jogar[i-1][j][k] = False
@@ -349,7 +368,7 @@ def jogada_do_computador_cod_4():
                             casas_pode_jogar[i-1][j-1][k] = False
                             casas_pode_jogar[i-2][j-2][k] = False
 
-                        
+    # Gera-se a jogada do computador em uma das casas permitidas    
     for a in range(1000):             
         i = r.randint(0,2)
         j = r.randint(0,2)
@@ -370,8 +389,7 @@ def jogada_do_computador_cod_4():
                     carregando()
                     return imprimir_tabuleiro()
 
-
-                
+    # Caso todas as casas estejam bloqueadas, rodará a quinta condição
     jogada_do_computador_cod_5()
 
 # Condiçao 3
@@ -438,11 +456,8 @@ def jog_maq_entb_diag_op3():
         
         elif matriz[0][2][2] == ' ' and matriz[2][0][0] == ' ':
             casas_pode_jogar[0][2][2] = True
-            
-    
 
     complemento_3()
-    
 
 def jog_maq_entb_mc_op3():
     global casas_pode_jogar
@@ -469,7 +484,6 @@ def jog_maq_entb_mc_op3():
                 casas_pode_jogar[z+2][z][i] = True
     
     jog_maq_entb_diag_op3()
-
 
 def jog_maq_entb_g_op3():
     global casas_pode_jogar
@@ -606,14 +620,7 @@ def jogada_maquina_op3():
                     casas_pode_jogar[i][j][z+2] = True
                     
     jogada_maquina_lin_op3()
-
-#cabouu
-
-
-
-
-
-
+# fim
 
 #jogada do computador opção 2
 def jog_maq_entb_diag():
@@ -686,7 +693,6 @@ def jog_maq_entb_diag():
 
     jogada_maquina_op3()
     
-
 def jog_maq_entb_mc():
     global nj
     z = 0
@@ -724,8 +730,8 @@ def jog_maq_entb_mc():
                 nj += 1
                 carregando()
                 return imprimir_tabuleiro()
-    jog_maq_entb_diag()
 
+    jog_maq_entb_diag()
 
 def jog_maq_entb_g():
     global nj
@@ -763,6 +769,7 @@ def jog_maq_entb_g():
                 nj += 1
                 carregando()
                 return imprimir_tabuleiro()
+    
     jog_maq_entb_mc()
 
 def jogada_maquina_entb():
@@ -788,6 +795,7 @@ def jogada_maquina_entb():
                     nj += 1
                     carregando()
                     return imprimir_tabuleiro()
+
     jog_maq_entb_g()
 
 def jogada_maquina_diag():
@@ -826,6 +834,7 @@ def jogada_maquina_diag():
                 nj += 1
                 carregando()
                 return imprimir_tabuleiro()
+
     jogada_maquina_entb()
 
 def jogada_maquina_lin():
@@ -851,6 +860,7 @@ def jogada_maquina_lin():
                     nj += 1
                     carregando()
                     return imprimir_tabuleiro()
+
     jogada_maquina_diag()
 
 def jogada_maquina_2():
@@ -876,8 +886,9 @@ def jogada_maquina_2():
                     nj += 1
                     carregando()
                     return imprimir_tabuleiro()
+    
     jogada_maquina_lin()
-
+# fim
 
 #jogada do computador opção 1
 def vit_maq_entb_diag():
@@ -971,6 +982,7 @@ def vit_maq_entb_diag():
             der += 1
             carregando()
             return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'), mixer.music.load("defeat.mp3"), mixer.music.play())
+
     jogada_maquina_2()
 
 def vit_maq_entb_mc():
@@ -1023,6 +1035,7 @@ def vit_maq_entb_mc():
                 der += 1
                 carregando()
                 return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'), mixer.music.load("defeat.mp3"), mixer.music.play())  
+
     vit_maq_entb_diag()
 
 def vit_maq_entb_g():
@@ -1076,6 +1089,7 @@ def vit_maq_entb_g():
                 der += 1
                 carregando()
                 return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'), mixer.music.load("defeat.mp3"), mixer.music.play())
+
     vit_maq_entb_mc()
 
 def vitoria_maquina_entb():
@@ -1109,6 +1123,7 @@ def vitoria_maquina_entb():
                     der += 1
                     carregando()
                     return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'), mixer.music.load("defeat.mp3"), mixer.music.play())
+
     vit_maq_entb_g()
 
 def vitoria_maquina_diag():
@@ -1160,6 +1175,7 @@ def vitoria_maquina_diag():
                 der += 1
                 carregando()
                 return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'), mixer.music.load("defeat.mp3"), mixer.music.play())
+
     vitoria_maquina_entb()
 
 def vitoria_maquina_lin():
@@ -1191,6 +1207,7 @@ def vitoria_maquina_lin():
                     der += 1
                     carregando()
                     return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'), mixer.music.load("defeat.mp3"), mixer.music.play())
+
     vitoria_maquina_diag()
 
 def jogada_maquina():
@@ -1222,14 +1239,21 @@ def jogada_maquina():
                     der += 1
                     carregando()
                     return (imprimir_tabuleiro(), print('VITÓRIA DO COMPUTADOR'), mixer.music.load("defeat.mp3"), mixer.music.play())
-    vitoria_maquina_lin()
 
+    vitoria_maquina_lin()
+# fim
+
+# Código principal
 continuar_jogando = True
 while (continuar_jogando):
     tem_vencedor = False
+
     matriz = [ [[' ',' ',' ']for i in range(3)]for j in range(3) ]
+
     imprimir_tabuleiro()
+
     casas_pode_jogar = [[[False, False, False]for i in range (3)]for j in range(3)]
+
     nj = 0
     count = der
     caractere_player = input("Deseja jogar com X ou O? ")
@@ -1239,6 +1263,7 @@ while (continuar_jogando):
         print('Digite um caractere válido: "X" ou "O"')
         caractere_player = input("Deseja jogar com X ou O? ")
 
+    # Definindo cores para os caracteres
     if caractere_player == 'X':
         caractere_player = '\033[1;91mX'
         caractere_computer = '\033[1;34mO'
@@ -1248,7 +1273,6 @@ while (continuar_jogando):
 
     # Primeira jogada do usuário
     jogada_do_usuario()
-
 
     # Primeira jogada do computador
     jogada_maquina()
@@ -1260,15 +1284,14 @@ while (continuar_jogando):
         else:
             jogada_maquina()
 
+    # Caso todas as casa estejam preenchidas e não haja vencedor, declara-se empate
     if nj == 27:
         emp += 1
     
-
     if count == der:
         vit += 1
 
-
-    # Pergunta-se ao usuário se ele deseja continuar jogando
+    # Mostrar placar na tela
     print('Número de jogadas:', nj)
     print('Quantidade de jogadas do player:', int(nj/2)+1)
     print('quantidade de jogadas do computador:', int(nj/2))
@@ -1277,6 +1300,8 @@ while (continuar_jogando):
     print('\033[1;92mVITÓRIAS:', vit, end='    ')
     print('\033[1;91mDERROTAS:', der, end='    ')
     print('\033[1;93mEMPATES:', emp, '\033[0;0m')
+
+    # Pergunta-se ao usuário se ele deseja continuar jogando
     cj = input("Deseja continuar jogando? (Digite S para sim e N para não): ")
     while cj != "N" and cj != "S":
         print("Erro, tente novamente.")
@@ -1285,3 +1310,5 @@ while (continuar_jogando):
         continuar_jogando = False
     else:
         limpar()
+
+print("Obrigado por jogar!")
