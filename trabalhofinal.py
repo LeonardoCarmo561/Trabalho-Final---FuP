@@ -381,6 +381,7 @@ def jogada_do_computador_cod_4():
             nj += 1
             matriz[i][j][k] = caractere_computer
             carregando()
+            casas_pode_jogar = [[[False, False, False]for i in range(3)]for j in range (3)]
             return imprimir_tabuleiro()
 
     for i in range(3):
@@ -390,6 +391,7 @@ def jogada_do_computador_cod_4():
                     nj += 1
                     matriz[i][j][k] = caractere_computer
                     carregando()
+                    casas_pode_jogar = [[[False, False, False]for i in range(3)]for j in range (3)]
                     return imprimir_tabuleiro()
 
     # Caso todas as casas estejam bloqueadas, rodará a quinta condição
