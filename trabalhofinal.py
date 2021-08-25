@@ -1,3 +1,6 @@
+# Antonio Leonrado Rolim do Carmo - 507973
+# Gustavo Wendell Moreira Valença - 508016
+
 import random as r
 from sys import platform
 from pygame import mixer
