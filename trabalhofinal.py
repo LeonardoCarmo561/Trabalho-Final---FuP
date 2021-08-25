@@ -258,17 +258,35 @@ def jogada_do_computador_cod_4():
                     if j == 0:
                         casas_pode_jogar[i][j+1][k] = False
                         casas_pode_jogar[i][j+2][k] = False
+
+                        if k == 2:
+                            casas_pode_jogar[i][j+1][k-1] = False
+                            casas_pode_jogar[i][j+2][k-2] = False
+
+                        
                     elif j == 1:
                         casas_pode_jogar[i][j-1][k] = False
                         casas_pode_jogar[i][j+1][k] = False
+                        casas_pode_jogar[i][j-2][k] = False
+                        casas_pode_jogar[i][j-1][k] = False
+
                     else:
                         casas_pode_jogar[i][j-2][k] = False
                         casas_pode_jogar[i][j-1][k] = False
+                        
+                        if k == 0:
+                            casas_pode_jogar[i][j-1][k+1] = False
+                            casas_pode_jogar[i][j-2][k+2] = False
+
+                        elif k == 2:
+                            casas_pode_jogar[i][j-1][k-1] = False
+                            casas_pode_jogar[i][j-2][k-2] = False
                     
 
                     if k == 0:
                         casas_pode_jogar[i][j][k+1] = False
                         casas_pode_jogar[i][j][k+2] = False
+                        
 
                         if j == k:
                             casas_pode_jogar[i][j+1][k+1] = False
@@ -310,15 +328,30 @@ def jogada_do_computador_cod_4():
                             if k == 0:
                                 casas_pode_jogar[i+1][j+1][k+1] = False
                                 casas_pode_jogar[i+2][j+2][k+2] = False
+
+                                casas_pode_jogar[i+1][j][k+1] = False
+                                casas_pode_jogar[i+2][j][k+2] = False
                             
                             elif k == 2:
                                 casas_pode_jogar[1][1][1] = False
                                 casas_pode_jogar[2][2][0] = False
 
-                        if j == 1:
-                            if k == 2:
                                 casas_pode_jogar[i+1][j][k-1] = False
                                 casas_pode_jogar[i+2][j][k-2] = False
+
+                        if j == 1:
+                            if k == 0:
+                                casas_pode_jogar[i+1][j][k+1] = False
+                                casas_pode_jogar[i+2][j][k+2] = False
+
+
+                            elif k == 2:
+                                casas_pode_jogar[i+1][j][k-1] = False
+                                casas_pode_jogar[i+2][j][k-2] = False
+
+                                casas_pode_jogar[i+1][j][k-1] = False
+                                casas_pode_jogar[i+2][j][k-2] = False
+                                
                         
 
                         elif j == 2:
@@ -329,16 +362,30 @@ def jogada_do_computador_cod_4():
                                 casas_pode_jogar[1][1][1] = False
                                 casas_pode_jogar[2][0][2] = False
 
+                                casas_pode_jogar[i+1][j][k+1] = False
+                                casas_pode_jogar[i+2][j][k+2] = False
+
                             elif k == 2:
                                 casas_pode_jogar[1][1][1] = False
                                 casas_pode_jogar[2][0][0] = False
+
+                                casas_pode_jogar[i+1][j][k-1] = False
+                                casas_pode_jogar[i+2][j][k-2] = False
                     
                     # Camada 2
                     elif i == 1:
                         casas_pode_jogar[i-1][j][k] = False
                         casas_pode_jogar[i+1][j][k] = False
 
-                        if j == 1:
+                        if j == 0:
+                            if k == 1:
+                                casas_pode_jogar[i-1][j][k-1] = False
+                                casas_pode_jogar[i+1][j][k+1] = False
+
+                                casas_pode_jogar[i-1][j][k+1] = False
+                                casas_pode_jogar[i+1][j][k-1] = False
+
+                        elif j == 1:
                             casas_pode_jogar[i-1][j+1][k] = False
                             casas_pode_jogar[i-1][j-1][k] = False
 
@@ -370,9 +417,41 @@ def jogada_do_computador_cod_4():
                             casas_pode_jogar[i-1][j+1][k] = False
                             casas_pode_jogar[i-2][j+2][k] = False
 
+                            if k == 2:
+                                casas_pode_jogar[i-1][j][k-1] = False
+                                casas_pode_jogar[i-2][j][k-2] = False
+
+                                casas_pode_jogar[i-1][j+1][k-1] = False
+                                casas_pode_jogar[i-2][j+2][k-2] = False
+
+                        elif j == 1:
+                            if k == 0:
+                                casas_pode_jogar[i-1][j][k+1] = False
+                                casas_pode_jogar[i-2][j][k+2] = False
+
+
+                            elif k == 2:
+                                casas_pode_jogar[i-1][j][k-1] = False
+                                casas_pode_jogar[i-2][j][k-2] = False
+
+                        
                         elif j == 2:
                             casas_pode_jogar[i-1][j-1][k] = False
                             casas_pode_jogar[i-2][j-2][k] = False
+
+                            if k == 0:
+                                casas_pode_jogar[i-1][j][k+1] = False
+                                casas_pode_jogar[i-2][j][k+2] = False
+
+                                casas_pode_jogar[i-1][j-1][k+1] = False
+                                casas_pode_jogar[i-2][j-2][k+2] = False
+                            
+                            elif k == 2:
+                                casas_pode_jogar[i-1][j][k-1] = False
+                                casas_pode_jogar[i-2][j][k-2] = False
+
+                                casas_pode_jogar[i-1][j-1][k-1] = False
+                                casas_pode_jogar[i-2][j-2][k-2] = False
 
     # Gera-se a jogada do computador em uma das casas permitidas    
     for a in range(1000):             
@@ -450,7 +529,7 @@ def jog_maq_entb_diag_op3():
             casas_pode_jogar[1][1][1] = True
             
         elif matriz[0][2][2] == caractere_computer and matriz[2][0][0] == ' ':
-            matriz[1][1][1] = True
+            casas_pode_jogar[1][1][1] = True
         
     elif matriz[1][1][1] == caractere_computer:
         if matriz[0][0][0] == ' ' and matriz[2][2][2] == ' ':
